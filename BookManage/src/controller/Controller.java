@@ -1,6 +1,6 @@
-package sample;
+package controller;
 
-import backend.*;
+import model.*;
 
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ObservableValue;
@@ -29,9 +29,9 @@ public class Controller {
 
     public void searchByNameWindow(ActionEvent event) {
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("searchByName.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../view/searchByName.fxml"));
             Parent root1 = (Parent) fxmlLoader.load();
-            this.searchByNameStage = new Stage();
+            Controller.searchByNameStage = new Stage();
             searchByNameStage.setScene(new Scene(root1));
             searchByNameStage.setTitle("저자 이름으로 검색");
             searchByNameStage.show();
@@ -42,9 +42,9 @@ public class Controller {
 
     public void searchByISBNWindow(ActionEvent event) {
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("searchByISBN.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../view/searchByISBN.fxml"));
             Parent root1 = (Parent) fxmlLoader.load();
-            this.searchByISBNStage = new Stage();
+            Controller.searchByISBNStage = new Stage();
             searchByISBNStage.setScene(new Scene(root1));
             searchByISBNStage.setTitle("ISBN으로 검색");
             searchByISBNStage.show();
@@ -55,9 +55,9 @@ public class Controller {
 
     public void addBookWindow(ActionEvent event) {
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("addBook.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../view/addBook.fxml"));
             Parent root1 = (Parent) fxmlLoader.load();
-            this.addBookStage = new Stage();
+            Controller.addBookStage = new Stage();
             addBookStage.setScene(new Scene(root1));
             addBookStage.setTitle("책 추가");
             addBookStage.show();
@@ -75,11 +75,11 @@ public class Controller {
             printCommand.setText("빈칸 입니다!");
         } else {
             try {
-                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("TableView.fxml"));
+                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../view/TableView.fxml"));
                 Parent root1 = (Parent) fxmlLoader.load();
                 Stage tableViewStage = new Stage();
                 tableViewStage.setScene(new Scene(root1));
-                tableViewStage.setTitle("쿼리 결과");
+                tableViewStage.setTitle("책 목록");
                 TableView tableview = (TableView) tableViewStage.getScene().lookup("#tableview");
 
                 ObservableList<ObservableList> data = FXCollections.observableArrayList();
@@ -135,11 +135,11 @@ public class Controller {
             printCommand.setText("ISBN 필드는 비워둘 수 없습니다!");
         } else {
             try {
-                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("TableView.fxml"));
+                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../view/TableView.fxml"));
                 Parent root1 = (Parent) fxmlLoader.load();
                 Stage tableViewStage = new Stage();
                 tableViewStage.setScene(new Scene(root1));
-                tableViewStage.setTitle("쿼리 결과");
+                tableViewStage.setTitle("책 목록");
                 TableView tableview = (TableView) tableViewStage.getScene().lookup("#tableview");
 
                 ObservableList<ObservableList> data = FXCollections.observableArrayList();

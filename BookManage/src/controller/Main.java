@@ -1,4 +1,4 @@
-package sample;
+package controller;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -6,7 +6,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
-import backend.*;
+import model.*;
 
 
 //public class Main {
@@ -31,7 +31,7 @@ import backend.*;
     @Override
     public void start(Stage primaryStage) throws Exception{
         setPrimaryStage(primaryStage);
-        Parent root = FXMLLoader.load(getClass().getResource("sample.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("../view/sample.fxml"));
         primaryStage.setTitle("SQL BOOKS");
         primaryStage.setScene(new Scene(root));
         primaryStage.show();
