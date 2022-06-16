@@ -1,4 +1,6 @@
-package controller;
+package sample;
+
+import backend.*;
 
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ObservableValue;
@@ -15,7 +17,6 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableColumn.CellDataFeatures;
 import javafx.scene.control.TableView;
 import javafx.util.Callback;
-import model.*;
 
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
@@ -25,11 +26,10 @@ public class Controller {
     private static Stage searchByNameStage;
     private static Stage searchByISBNStage;
     private static Stage addBookStage;
-    private static Stage deleteBookStage;
 
     public void searchByNameWindow(ActionEvent event) {
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../view/searchByName.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("searchByName.fxml"));
             Parent root1 = (Parent) fxmlLoader.load();
             this.searchByNameStage = new Stage();
             searchByNameStage.setScene(new Scene(root1));
@@ -42,7 +42,7 @@ public class Controller {
 
     public void searchByISBNWindow(ActionEvent event) {
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../view/searchByISBN.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("searchByISBN.fxml"));
             Parent root1 = (Parent) fxmlLoader.load();
             this.searchByISBNStage = new Stage();
             searchByISBNStage.setScene(new Scene(root1));
@@ -55,25 +55,12 @@ public class Controller {
 
     public void addBookWindow(ActionEvent event) {
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../view/addBook.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("addBook.fxml"));
             Parent root1 = (Parent) fxmlLoader.load();
             this.addBookStage = new Stage();
             addBookStage.setScene(new Scene(root1));
             addBookStage.setTitle("책 추가");
             addBookStage.show();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-    
-    public void deleteBookWindow(ActionEvent event) {
-        try {
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../view/deleteBook.fxml"));
-            Parent root1 = (Parent) fxmlLoader.load();
-            this.deleteBookStage = new Stage();
-            deleteBookStage.setScene(new Scene(root1));
-            deleteBookStage.setTitle("책 삭제");
-            deleteBookStage.show();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -88,11 +75,11 @@ public class Controller {
             printCommand.setText("빈칸 입니다!");
         } else {
             try {
-                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../view/TableView.fxml"));
+                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("TableView.fxml"));
                 Parent root1 = (Parent) fxmlLoader.load();
                 Stage tableViewStage = new Stage();
                 tableViewStage.setScene(new Scene(root1));
-                tableViewStage.setTitle("책 목록");
+                tableViewStage.setTitle("쿼리 결과");
                 TableView tableview = (TableView) tableViewStage.getScene().lookup("#tableview");
 
                 ObservableList<ObservableList> data = FXCollections.observableArrayList();
@@ -148,7 +135,7 @@ public class Controller {
             printCommand.setText("ISBN 필드는 비워둘 수 없습니다!");
         } else {
             try {
-                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../view/TableView.fxml"));
+                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("TableView.fxml"));
                 Parent root1 = (Parent) fxmlLoader.load();
                 Stage tableViewStage = new Stage();
                 tableViewStage.setScene(new Scene(root1));
@@ -204,15 +191,16 @@ public class Controller {
         TextField isbn = (TextField) addBookStage.getScene().lookup("#isbn");
         TextField title = (TextField) addBookStage.getScene().lookup("#title");
         TextField author = (TextField) addBookStage.getScene().lookup("#author");
-        TextField year = (TextField) addBookStage.getScene().lookup("#year");
-
-        if (isbn.getText().isEmpty() || title.getText().isEmpty() || author.getText().isEmpty() || year.getText().isEmpty()) {
+        TextField regdate = (TextField) addBookStage.getScene().lookup("#regdate");
+        TextField price = (TextField) addBookStage.getScene().lookup("#price");
+        
+        if (isbn.getText().isEmpty() || title.getText().isEmpty() || author.getText().isEmpty() || regdate.getText().isEmpty() || price.getText().isEmpty()) {
             printCommand.setVisible(true);
             printCommand.setText("어떤 필드도 비울 수 없습니다!");
         } else {
-            dbSQL.addBook(isbn.getText(), title.getText(),author.getText(), year.getText());
+            dbSQL.addBook(isbn.getText(), title.getText(),author.getText(), regdate.getText(), price.getText() );
 
-            Alert alert = new Alert(Alert.AlertType.INFORMATION, "완료! :D", ButtonType.OK);
+            Alert alert = new Alert(Alert.AlertType.INFORMATION, "Dodano! :D", ButtonType.OK);
             alert.setTitle("추가되었습니다!");
             alert.setHeaderText(null);
             alert.showAndWait();
