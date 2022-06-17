@@ -59,6 +59,17 @@ public class DB {
 
     }
 
+    public void deleteBook() {
+        try {
+            connect();
+            stmt = conn.createStatement(); 
+            stmt.executeUpdate("ALTER TABLE books drop COLUMN");    
+                    
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
 
     public void searchByName(String name) {
         try {

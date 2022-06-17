@@ -60,6 +60,7 @@ public class DB {
     }
 
 
+
     public void searchByName(String name) {
         try {
             connect();

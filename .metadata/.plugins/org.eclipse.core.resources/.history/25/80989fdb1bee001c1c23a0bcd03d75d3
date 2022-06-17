@@ -59,6 +59,21 @@ public class DB {
 
     }
 
+    public void deleteBook(String isbn, String title, String author, String regdate, String price) {
+        try {
+            connect();
+            stmt = conn.createStatement(); 
+            stmt.executeUpdate("INSERT INTO books (isbn, title, author, regdate, price) VALUES (" +     //DB에 INSERT 명령
+                    "'" + isbn + "'," +
+                    "'" + title + "'," +
+                    "'" + author + "'," +
+                    "'" +regdate + "',"
+                    	+ price + ")");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
 
     public void searchByName(String name) {
         try {
