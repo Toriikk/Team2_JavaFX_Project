@@ -28,12 +28,11 @@ public class DB {
         try {
             connect();
             stmt = conn.createStatement(); 
-            stmt.executeUpdate("INSERT INTO books (isbn, title, author, regdate, price) VALUES (" +     //DB에 INSERT 명령
+            stmt.executeUpdate("INSERT INTO books (isbn, title, author, regdate) VALUES (" +     //DB에 INSERT 명령
                     "'" + isbn + "'," +
                     "'" + title + "'," +
                     "'" + author + "'," +
-                    "'" +regdate + "',"
-                    	+ price + ")");
+                   regdate + ")");
         } catch (Exception e) {
             e.printStackTrace();
         }

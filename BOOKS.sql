@@ -33,3 +33,17 @@ FROM books;
 
 ALTER TABLE books drop COLUMN regdate;
 ALTER TABLE books add regdate  VARCHAR2(10);
+
+commit;
+
+SELECT
+    *
+FROM books;
+
+DROP TABLE BOOKS;
+
+DROP TABLE EXERCISE;
+
+ALTER TABLE books drop COLUMN year;
+
+COMMIT;

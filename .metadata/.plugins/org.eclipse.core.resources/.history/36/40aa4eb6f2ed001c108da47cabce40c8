@@ -32,8 +32,7 @@ public class DB {
                     "'" + isbn + "'," +
                     "'" + title + "'," +
                     "'" + author + "'," +
-                    "'" +regdate + "',"
-                    	+ price + ")");
+                   regdate + ")");
         } catch (Exception e) {
             e.printStackTrace();
         }
