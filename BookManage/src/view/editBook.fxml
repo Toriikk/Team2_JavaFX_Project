@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="419.0" prefWidth="310.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.Controller">
+   <children>
+      <VBox layoutX="14.0" layoutY="14.0" prefHeight="399.0" prefWidth="287.0">
+         <children>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="수정할 책제목 입력" />
+            <TextField fx:id="editTargetTitle" prefHeight="23.0" prefWidth="139.0" />
+            <HBox prefHeight="53.0" prefWidth="287.0">
+               <children>
+                  <Label fx:id="printBookInformation" prefHeight="56.0" prefWidth="215.0" />
+                  <Button alignment="CENTER_RIGHT" onAction="#printInformation"  mnemonicParsing="false" text="정보 확인">
+                     <HBox.margin>
+                        <Insets top="10.0" />
+                     </HBox.margin>
+                  </Button>
+               </children>
+            </HBox>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="isbn" />
+            <TextField fx:id="editIsbn" maxWidth="130.0" prefHeight="23.0" prefWidth="130.0" />
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="제목" />
+            <TextField fx:id="editTitle" maxWidth="130.0" prefHeight="23.0" prefWidth="130.0" />
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="저자" />
+            <TextField fx:id="editAuthor" maxWidth="130.0" prefHeight="23.0" prefWidth="130.0" />
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="등록일" />
+            <TextField fx:id="editRegdate" maxWidth="130.0" prefHeight="23.0" prefWidth="130.0" />
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="가격" />
+            <TextField fx:id="editPrice" maxWidth="130.0" prefHeight="23.0" prefWidth="130.0" />
+            <HBox prefHeight="100.0" prefWidth="200.0" />
+            <HBox prefHeight="52.0" prefWidth="228.0">
+               <children>
+                  <Button fx:id="editBookConfirm" mnemonicParsing="false" onAction="#editBookButton" text="수정" />
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>
