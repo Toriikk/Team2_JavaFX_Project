@@ -1,6 +1,7 @@
 package controller;
 
-import model.*;
+import java.sql.SQLException;
+import java.util.Optional;
 
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ObservableValue;
@@ -10,22 +11,23 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.*;
-import javafx.stage.Stage;
-
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableColumn.CellDataFeatures;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
+import javafx.stage.Stage;
 import javafx.util.Callback;
-
-import java.sql.ResultSetMetaData;
-import java.sql.SQLException;
+import model.DB;
 
 public class Controller {
     private static DB dbSQL = new DB();
     private static Stage searchByNameStage;
     private static Stage searchByISBNStage;
     private static Stage addBookStage;
+    private static Stage editBookStage;
 
     public void searchByNameWindow(ActionEvent event) {
         try {
