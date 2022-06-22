@@ -1,7 +1,10 @@
 package controller;
 
+<<<<<<< HEAD
 
 import java.io.IOException;
+=======
+>>>>>>> e26cd255a73443bd8e17023711868113c3f4e9a5
 import java.sql.SQLException;
 import java.util.Optional;
 
@@ -23,11 +26,14 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import javafx.util.Callback;
 import model.DB;
+<<<<<<< HEAD
 
 
 
 
 
+=======
+>>>>>>> e26cd255a73443bd8e17023711868113c3f4e9a5
 
 public class Controller {
     private static DB dbSQL = new DB();  // DB클래스를 참조하는 dbSQL 객체 생성. 이것으로 connect() 메소드 사용가능
@@ -35,6 +41,7 @@ public class Controller {
     private static Stage searchByISBNStage;
     private static Stage searchByTitleStage;
     private static Stage addBookStage;
+<<<<<<< HEAD
     private static Stage deleteBookStage;
     private static Stage editBookStage;
     private static Stage editQuantityStage;
@@ -54,6 +61,9 @@ public class Controller {
             e.printStackTrace();
         }
     }
+=======
+    private static Stage editBookStage;
+>>>>>>> e26cd255a73443bd8e17023711868113c3f4e9a5
 
     public void searchByNameWindow(ActionEvent event) {
         try {
