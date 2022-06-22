@@ -26,6 +26,7 @@ ALTER TABLE books add regdate VARCHAR2(10) NOT NULL ;
 
 ALTER TABLE books add price number NOT NULL ;
 
+ALTER TABLE books add quantity number NOT NULL;
 
 SELECT
     *
