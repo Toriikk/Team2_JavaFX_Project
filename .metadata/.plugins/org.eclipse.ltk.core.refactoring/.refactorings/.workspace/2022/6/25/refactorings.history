@@ -1,0 +1,3 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">&#x0A;<refactoring comment="Delete resource &apos;SQL_Library_JavaFX-master&apos;" deleteContents="false" description="Delete resource &apos;SQL_Library_JavaFX-master&apos;" element1="/SQL_Library_JavaFX-master" flags="7" id="org.eclipse.ltk.core.refactoring.delete.resources" resources="1" stamp="1655466233675"/>&#x0A;<refactoring comment="Delete resource &apos;bin&apos;" deleteContents="false" description="Delete resource &apos;bin&apos;" element1="/bin" flags="7" id="org.eclipse.ltk.core.refactoring.delete.resources" resources="1" stamp="1655466283586"/>
+</session>
