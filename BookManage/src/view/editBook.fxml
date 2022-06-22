@@ -33,6 +33,8 @@
             <TextField fx:id="editRegdate" maxWidth="130.0" prefHeight="23.0" prefWidth="130.0" />
             <Text strokeType="OUTSIDE" strokeWidth="0.0" text="가격" />
             <TextField fx:id="editPrice" maxWidth="130.0" prefHeight="23.0" prefWidth="130.0" />
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="재고" />
+            <TextField fx:id="editQuantity" maxWidth="130.0" prefHeight="23.0" prefWidth="130.0" />
             <HBox prefHeight="100.0" prefWidth="200.0" />
             <HBox prefHeight="52.0" prefWidth="228.0">
                <children>
