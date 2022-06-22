@@ -38,7 +38,26 @@ public class DB {
             e.printStackTrace();
         }
     }
-
+  //title은 업데이트할 '값', title1은 업데이트할 '대상'
+    public void editBook(String isbn, String title, String author,String regdate, String price, String quantity,
+    		String title1) {
+    	try {
+            connect();              
+            stmt = conn.createStatement(); 
+           
+            stmt.executeUpdate("UPDATE books SET isbn =" + "'" + isbn + "'," + 
+            "title = " + "'" + title + "'," +
+            "author = " + "'" + author + "'," +
+            "regdate = " + "'" + regdate + "'," +
+            "price = " + "'" + price + "'," +
+            "quantity=" + "'" + quantity + "'" +
+            "WHERE title = " + "'" + title1 + "'");
+             
+            		
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
     public void freeUpResources(){
         if (rs != null) {
             try {

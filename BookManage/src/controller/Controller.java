@@ -210,4 +210,34 @@ public class Controller {
             dbSQL.freeUpResources();
         }
     }
+ // [추가된 부분] 책 수정
+  	public void editBookButton(ActionEvent event) {
+  		TextField editTargetTitle = (TextField) editBookStage.getScene().lookup("#editTargetTitle");
+         
+         TextField editIsbn = (TextField) editBookStage.getScene().lookup("#editIsbn");
+         TextField editTitle = (TextField) editBookStage.getScene().lookup("#editTitle");
+         TextField editAuthor = (TextField) editBookStage.getScene().lookup("#editAuthor");
+         TextField editRegdate = (TextField) editBookStage.getScene().lookup("#editRegdate");
+         TextField editPrice = (TextField) editBookStage.getScene().lookup("#editPrice");
+         TextField editQuantity = (TextField) editBookStage.getScene().lookup("#editQuantity");
+    		
+  	    Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+  	    alert.setTitle("도서 수정");
+  	    alert.setContentText("정말 수정하시겠습니까? 책제목 :" + editTargetTitle.getText());
+  	     
+  	     Optional<ButtonType> answer = alert.showAndWait();
+  	     
+  	    if(answer.get() == ButtonType.OK){
+  	    	 dbSQL.editBook( editIsbn.getText(), editTitle.getText(),editAuthor.getText(), editRegdate.getText(), editPrice.getText(), editQuantity.getText(),
+  	    			editTargetTitle.getText());
+  	    // isbn, 제목, 저자, 등록일, 가격을 입력하여 바꾼다.
+  	     Alert alert2 = new Alert(Alert.AlertType.INFORMATION, "완료! :D", ButtonType.OK);
+  	     alert2.setTitle("수정되었습니다!");
+  	     alert2.setHeaderText(null);
+  	     alert2.showAndWait();
+  	     if (alert2.getResult() == ButtonType.OK) {
+  	         editBookStage.close();
+  	     }
+      }
+   }
 }
