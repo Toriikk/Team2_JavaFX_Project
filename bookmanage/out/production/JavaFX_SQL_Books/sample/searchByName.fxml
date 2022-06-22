@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane prefHeight="146.0" prefWidth="320.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
+   <children>
+      <Label layoutX="45.0" layoutY="31.0" prefHeight="30.0" prefWidth="300.0" text="Podaj nazwisko autora:" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="10.0">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Label>
+      <TextField fx:id="name" layoutX="45.0" layoutY="67.0" prefHeight="30.0" prefWidth="300.0" promptText="nazwisko" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="50.0" />
+      <Button fx:id="searchNameButton" layoutX="45.0" layoutY="112.0" mnemonicParsing="false" onAction="#searchByNameButton" prefHeight="30.0" prefWidth="300.0" text="Wyszukaj !" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="90.0">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font>
+      </Button>
+      <Label fx:id="command" layoutX="14.0" layoutY="122.0" prefHeight="30.0" prefWidth="300.0" textFill="RED" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" />
+   </children>
+</AnchorPane>
