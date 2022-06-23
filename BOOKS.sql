@@ -1,50 +1,20 @@
-CREATE TABLE BOOKS (
-    ISBN NUMBER NOT NULL,
-    TITLE VARCHAR2(100),
-    AUTHOR VARCHAR2(100),
-    YEAR NUMBER NOT NULL
-);
-
-COMMIT;
-SELECT
-    *
-FROM books;
-
-DELETE FROM books;
-
-ALTER TABLE books drop COLUMN year;
-
-SELECT
-    *
-FROM books;
-
-ALTER TABLE books add year NUMBER NOT NULL;
-
-ALTER TABLE books drop COLUMN year;
-
-ALTER TABLE books add regdate VARCHAR2(10) NOT NULL ;  
-
-ALTER TABLE books add price number NOT NULL ;
-
-ALTER TABLE books add quantity number NOT NULL;
-
-SELECT
-    *
-FROM books;
-
-ALTER TABLE books drop COLUMN regdate;
-ALTER TABLE books add regdate  VARCHAR2(10);
-
-commit;
-
-SELECT
-    *
-FROM books;
-
 DROP TABLE BOOKS;
 
-DROP TABLE EXERCISE;
+CREATE TABLE BOOKS (
+    isbn NUMBER NOT NULL,
+    title VARCHAR2(70) NOT NULL,
+    author VARCHAR2(15) NOT NULL,
+    regdate DATE NOT NULL,
+    price NUMBER NOT NULL,
+    quantity NUMBER NOT NULL
+);
 
-ALTER TABLE books drop COLUMN year;
-
-COMMIT;
+INSERT ALL 
+INTO BOOKS VALUES (8968481474,'이것이 자바다','신용권',TO_DATE('2022-06-22','YYYY-MM-DD'),22000,100)
+INTO BOOKS VALUES (8997390910,'DO IT! 점프 투 파이썬','박응용',TO_DATE('2022-01-03','YYYY-MM-DD'),35000,30)
+INTO BOOKS VALUES (8984688630,'JSP 프로그래밍','조혁현',TO_DATE('2021-09-07','YYYY-MM-DD'),29000,10)
+INTO BOOKS VALUES (9791187370703,'DO IT! C언어 입문','김성엽',TO_DATE('2022-05-10','YYYY-MM-DD'),24000,50)
+INTO BOOKS VALUES (9791186710128,'Servlet  JSP 웹 프로그래밍(처음 해보는)','오정임',TO_DATE('2022-04-21','YYYY-MM-DD'),20000,5)
+                                  SELECT * FROM DUAL;
+                                  
+SELECT * FROM BOOKS;
