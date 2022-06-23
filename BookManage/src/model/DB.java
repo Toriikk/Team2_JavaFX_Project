@@ -92,7 +92,7 @@ public class DB {
             "title = " + "'" + title + "'," +
             "author = " + "'" + author + "'," +
             "regdate = TO_DATE(" + "'" + regdate + "','YYYY-MM-DD')," +  // DATE형식으로 입력
-            "price = " + "'" + price + "'," +
+            "price = " + "'" + price + "'" +
             "WHERE title = " + "'" + title1 + "'");
              
             		
