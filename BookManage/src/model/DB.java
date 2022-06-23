@@ -64,7 +64,7 @@ public class DB {
     }
     
   
-    public void addBook(String isbn, String title, String author,String regdate, String price, String quantity) {
+    public void addBook(String isbn, String title, String author, String price, String quantity) {
         try {
             connect();  // sql과 연결 시도
             stmt = conn.createStatement(); // sql문을 받아주는 stmt 생성
@@ -73,7 +73,7 @@ public class DB {
                     "'" + isbn + "'," +
                     "'" + title + "'," +
                     "'" + author + "'," +
-                    "'" +regdate + "'," +
+                    "TO_CHAR(SYSDATE,'YYYY-MM-DD'),"+  //현재 날짜를 DATE형식으로 입력
                     "'" +price + "'," 
                     + quantity + ")");  // sql문을 실행해줌. isbn, title, author, year,regdate,price 컬럼에 값(VALUES)을 넣는다
         } catch (Exception e) {
@@ -82,7 +82,7 @@ public class DB {
     }
     
     //title은 업데이트할 '값', title1은 업데이트할 '대상'
-    public void editBook(String isbn, String title, String author,String regdate, String price, String quantity,
+    public void editBook(String isbn, String title, String author,String regdate, String price, 
     		String title1) {
     	try {
             connect();              
@@ -91,9 +91,8 @@ public class DB {
             stmt.executeUpdate("UPDATE books SET isbn =" + "'" + isbn + "'," + 
             "title = " + "'" + title + "'," +
             "author = " + "'" + author + "'," +
-            "regdate = " + "'" + regdate + "'," +
+            "regdate = TO_DATE(" + "'" + regdate + "','YYYY-MM-DD')," +  // DATE형식으로 입력
             "price = " + "'" + price + "'," +
-            "quantity=" + "'" + quantity + "'" +
             "WHERE title = " + "'" + title1 + "'");
              
             		
@@ -121,137 +120,137 @@ public class DB {
         }
 
     }
- //삭제해도 지장없음 제작자가 만들어놓고 안쓰는 메소드//
-    public void searchByName(String name) {
-        try {
-            connect();
-            stmt = conn.createStatement();
-            
-
-            rs = stmt.executeQuery("SELECT * FROM books WHERE author LIKE '%" + name + "%'");
-
-            ResultSetMetaData rsmd = rs.getMetaData();
-            int columnCount = rsmd.getColumnCount();
-            for (int i = 1; i <= columnCount; i++) {
-                String colName = rsmd.getColumnName(i);
-                System.out.print(colName + ":" + getSpacesToPrint(colName + ":"));
-            }
-            System.out.println();
-            while (rs.next()) {
-                for (int i = 1; i <= columnCount; i++) {
-                    String str = rs.getString(i);
-                    System.out.print(str + getSpacesToPrint(str));
-                }
-                System.out.println();
-            }
-        } catch (SQLException ex) {
-            // handle any errors
-            ex.printStackTrace();
-        } finally {
-            this.freeUpResources();
-        }
-    }
-    
-    public void searchByTitle(String title) {
-        try {
-            connect();
-            stmt = conn.createStatement();
-            
-
-            rs = stmt.executeQuery("SELECT * FROM books WHERE title =" + "'"+ title + "'");
-
-            ResultSetMetaData rsmd = rs.getMetaData();
-            int columnCount = rsmd.getColumnCount();
-            for (int i = 1; i <= columnCount; i++) {
-                String colName = rsmd.getColumnName(i);
-                System.out.print(colName + ":" + getSpacesToPrint(colName + ":"));
-            }
-            System.out.println();
-            while (rs.next()) {
-                for (int i = 1; i <= columnCount; i++) {
-                    String str = rs.getString(i);
-                    System.out.print(str + getSpacesToPrint(str));
-                }
-                System.out.println();
-            }
-        } catch (SQLException ex) {
-            // handle any errors
-            ex.printStackTrace();
-        } finally {
-            this.freeUpResources();
-        }
-    }
-    public void searchByISBN(String isbnNumber) {
-        try {
-            connect();
-            stmt = conn.createStatement();
-            // Wyciagamy wszystkie wiersze danego autora
-
-            rs = stmt.executeQuery("SELECT * FROM books WHERE ISBN= " + isbnNumber);
-
-            ResultSetMetaData rsmd = rs.getMetaData();
-            int columnCount = rsmd.getColumnCount();
-            for (int i = 1; i <= columnCount; i++) {
-                String colName = rsmd.getColumnName(i);
-                System.out.print(colName + ":" + getSpacesToPrint(colName + ":"));
-            }
-            System.out.println();
-            while (rs.next()) {
-                for (int i = 1; i <= columnCount; i++) {
-                    String str = rs.getString(i);
-                    System.out.print(str + getSpacesToPrint(str));
-                }
-                System.out.println();
-            }
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-
-        } finally {
-           
-            this.freeUpResources();
-        }
-    }
-    public void listNames() {
-        try {
-            connect();
-            stmt = conn.createStatement();
-
-            
-            rs = stmt.executeQuery("SELECT author FROM books");
-
-            while (rs.next()) {
-                String name = rs.getString(1);
-                System.out.println("사용자: " + name);
-            }
-        } catch (SQLException ex) {
-            // handle any errors
-
-        } finally {
-            
-            if (rs != null) {
-                try {
-                    rs.close();
-                } catch (SQLException sqlEx) {
-                } // ignore
-                rs = null;
-            }
-
-            if (stmt != null) {
-                try {
-                    stmt.close();
-                } catch (SQLException sqlEx) {
-                } // ignore
-
-                stmt = null;
-            }
-        }
-    }
-    private String getSpacesToPrint(String wordToPrint) {
-        Integer i = 40;
-        String str = new String("          " + "          " + "          " + "          "); 
-        if (wordToPrint.length() > i) {
-            throw new RuntimeException("String to print is too long");
-        }
-        return str.substring(0, i - wordToPrint.length());
-    }
+// //삭제해도 지장없음 제작자가 만들어놓고 안쓰는 메소드//
+//    public void searchByName(String name) {
+//        try {
+//            connect();
+//            stmt = conn.createStatement();
+//            
+//
+//            rs = stmt.executeQuery("SELECT * FROM books WHERE author LIKE '%" + name + "%'");
+//
+//            ResultSetMetaData rsmd = rs.getMetaData();
+//            int columnCount = rsmd.getColumnCount();
+//            for (int i = 1; i <= columnCount; i++) {
+//                String colName = rsmd.getColumnName(i);
+//                System.out.print(colName + ":" + getSpacesToPrint(colName + ":"));
+//            }
+//            System.out.println();
+//            while (rs.next()) {
+//                for (int i = 1; i <= columnCount; i++) {
+//                    String str = rs.getString(i);
+//                    System.out.print(str + getSpacesToPrint(str));
+//                }
+//                System.out.println();
+//            }
+//        } catch (SQLException ex) {
+//            // handle any errors
+//            ex.printStackTrace();
+//        } finally {
+//            this.freeUpResources();
+//        }
+//    }
+//    
+//    public void searchByTitle(String title) {
+//        try {
+//            connect();
+//            stmt = conn.createStatement();
+//            
+//
+//            rs = stmt.executeQuery("SELECT * FROM books WHERE title =" + "'"+ title + "'");
+//
+//            ResultSetMetaData rsmd = rs.getMetaData();
+//            int columnCount = rsmd.getColumnCount();
+//            for (int i = 1; i <= columnCount; i++) {
+//                String colName = rsmd.getColumnName(i);
+//                System.out.print(colName + ":" + getSpacesToPrint(colName + ":"));
+//            }
+//            System.out.println();
+//            while (rs.next()) {
+//                for (int i = 1; i <= columnCount; i++) {
+//                    String str = rs.getString(i);
+//                    System.out.print(str + getSpacesToPrint(str));
+//                }
+//                System.out.println();
+//            }
+//        } catch (SQLException ex) {
+//            // handle any errors
+//            ex.printStackTrace();
+//        } finally {
+//            this.freeUpResources();
+//        }
+//    }
+//    public void searchByISBN(String isbnNumber) {
+//        try {
+//            connect();
+//            stmt = conn.createStatement();
+//            // Wyciagamy wszystkie wiersze danego autora
+//
+//            rs = stmt.executeQuery("SELECT * FROM books WHERE ISBN= " + isbnNumber);
+//
+//            ResultSetMetaData rsmd = rs.getMetaData();
+//            int columnCount = rsmd.getColumnCount();
+//            for (int i = 1; i <= columnCount; i++) {
+//                String colName = rsmd.getColumnName(i);
+//                System.out.print(colName + ":" + getSpacesToPrint(colName + ":"));
+//            }
+//            System.out.println();
+//            while (rs.next()) {
+//                for (int i = 1; i <= columnCount; i++) {
+//                    String str = rs.getString(i);
+//                    System.out.print(str + getSpacesToPrint(str));
+//                }
+//                System.out.println();
+//            }
+//        } catch (SQLException ex) {
+//            ex.printStackTrace();
+//
+//        } finally {
+//           
+//            this.freeUpResources();
+//        }
+//    }
+//    public void listNames() {
+//        try {
+//            connect();
+//            stmt = conn.createStatement();
+//
+//            
+//            rs = stmt.executeQuery("SELECT author FROM books");
+//
+//            while (rs.next()) {
+//                String name = rs.getString(1);
+//                System.out.println("사용자: " + name);
+//            }
+//        } catch (SQLException ex) {
+//            // handle any errors
+//
+//        } finally {
+//            
+//            if (rs != null) {
+//                try {
+//                    rs.close();
+//                } catch (SQLException sqlEx) {
+//                } // ignore
+//                rs = null;
+//            }
+//
+//            if (stmt != null) {
+//                try {
+//                    stmt.close();
+//                } catch (SQLException sqlEx) {
+//                } // ignore
+//
+//                stmt = null;
+//            }
+//        }
+//    }
+//    private String getSpacesToPrint(String wordToPrint) {
+//        Integer i = 40;
+//        String str = new String("    " + "    " + "   " + "   "); 
+//        if (wordToPrint.length() > i) {
+//            throw new RuntimeException("String to print is too long");
+//        }
+//        return str.substring(0, i - wordToPrint.length());
+//    }
 }

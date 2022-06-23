@@ -1,10 +1,7 @@
 package controller;
 
-<<<<<<< HEAD
 
 import java.io.IOException;
-=======
->>>>>>> e26cd255a73443bd8e17023711868113c3f4e9a5
 import java.sql.SQLException;
 import java.util.Optional;
 
@@ -26,14 +23,11 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import javafx.util.Callback;
 import model.DB;
-<<<<<<< HEAD
 
 
 
 
 
-=======
->>>>>>> e26cd255a73443bd8e17023711868113c3f4e9a5
 
 public class Controller {
     private static DB dbSQL = new DB();  // DB클래스를 참조하는 dbSQL 객체 생성. 이것으로 connect() 메소드 사용가능
@@ -41,7 +35,6 @@ public class Controller {
     private static Stage searchByISBNStage;
     private static Stage searchByTitleStage;
     private static Stage addBookStage;
-<<<<<<< HEAD
     private static Stage deleteBookStage;
     private static Stage editBookStage;
     private static Stage editQuantityStage;
@@ -61,9 +54,6 @@ public class Controller {
             e.printStackTrace();
         }
     }
-=======
-    private static Stage editBookStage;
->>>>>>> e26cd255a73443bd8e17023711868113c3f4e9a5
 
     public void searchByNameWindow(ActionEvent event) {
         try {
@@ -147,6 +137,7 @@ public class Controller {
         Label printCommand = (Label) searchByTitleStage.getScene().lookup("#command");
         printCommand.setVisible(false);
         TextField title = (TextField) searchByTitleStage.getScene().lookup("#title");
+        
 
         if (title.getText().isEmpty()) {
             printCommand.setVisible(true);
@@ -268,10 +259,12 @@ public class Controller {
                 Stage tableViewStage = new Stage();	// stage 생성
                 tableViewStage.setScene(new Scene(root1)); // scene 생성
                 tableViewStage.setTitle("작가명으로 검색 결과"); 
-                TableView tableview = (TableView) tableViewStage.getScene().lookup("#tableview");
+                TableView tableview = (TableView) tableViewStage.getScene().lookup("#tableview");  // tableview.fxml에 있는 tableview를 참조한다
+                																				   
 
-                ObservableList<ObservableList> data = FXCollections.observableArrayList();  // ObservableList를 구현시키기 위한 객체 생성
+                ObservableList<ObservableList> data = FXCollections.observableArrayList();  // 자바FX의 컬렉션들(배열)을 구현시키기 위한 객체 생성
                 																			// ObservableList는 배열의 한 종류
+                	                                                                        // 값이 변경될때마다 즉각적으로 반영함
 				                                                                            // ListView 컨트롤을 위해 필요 
                 																			// ListView는 항목들을 목록으로 보여주는 역할
                 dbSQL.connect(); //sql과 연결 시도
@@ -280,37 +273,42 @@ public class Controller {
                 // stmt를 통해 위 sql문을 실행하고 그 결과를 rs에 저장함( 검색한 결과 [name.getText()]  와 같은 저자를 가진 책 목록 출력하기) 
                 
                 //동적으로 테이블을 생성= 빈 화면인 tableview에서 테이블을 만듬 //
+                // 테이블을 만들고 열의 이름들을 가져와 넣는 과정 // 
                 for (int i = 0; i < dbSQL.rs.getMetaData().getColumnCount(); i++) {
                     // rs에 저장된 총 열 개수 만큼 for문을 돌림
                     final int j = i;
                     TableColumn col = new TableColumn(dbSQL.rs.getMetaData().getColumnName(i + 1));  // TableColumn : 해당 열의 내용을 편집하는 클래스
                                                          // sql문을 실행했던 결과를 저장한 rs의 정보를 가져온 후 
-                    									 // 해당되는 열의 이름을 참조하는 객체인 col 생성
+                    									 // 해당되는 열의 이름을 참조하는 객체인 col 생성 (isbn,title등 컬럼의 이름들을 가져옴)
                     col.setCellValueFactory((Callback<CellDataFeatures<ObservableList, String>, ObservableValue<String>>) param -> new SimpleStringProperty(param.getValue().get(j).toString()));
                     // param 은 특정 cell에 대한 정보를 제공하는데 필요한 객체 
                     // setCellValueFactory는 대상의 cell안에 있는 값을 추출함
                     // Callback은 ObservableList안에 있는 특정 행의 데이터를 가져옴. 
-                    tableview.getColumns().addAll(col);
+                   
+                    tableview.getColumns().addAll(col);  // 열의 이름들을 테이블에 집어넣음
                     System.out.println("Column [" + i + "] ");
                 }
 
                 //이제 실제로 테이블에 데이터가 저장//
                 while (dbSQL.rs.next()) { // rs에 값이 존재하지 않을때까지 반복
-                    //Iterate Row
-                    ObservableList<String> row = FXCollections.observableArrayList();
-                    for (int i = 1; i <= dbSQL.rs.getMetaData().getColumnCount(); i++) {
-                        //Iterate Column
-                        row.add(dbSQL.rs.getString(i));
-                    }
+                    
+                    ObservableList<String> row = FXCollections.observableArrayList(); // ObervableList를 참조하는 객체인 row 생성
+                    for (int i = 1; i <= dbSQL.rs.getMetaData().getColumnCount(); i++) { // rs의 열 개수만큼 반복
+                    
+                        row.add(dbSQL.rs.getString(i)); // i번째에 있는 컬럼의 데이터들을 String으로 변환하여
+                    }                                   // ObservableList을 참조하는 row에 집어넣음
                     System.out.println("Row [1] added " + row);
-                    data.add(row);
+                    
+                    data.add(row);  // 이제 그것들을 다시 ObservableList 타입인 data에 집어넣는다
                 }
                 //FINALLY ADDED TO TableView
-                tableview.setItems(data);
-                tableViewStage.show();
+                tableview.setItems(data); // 아까 위에 TableView tableview = (TableView) tableViewStage.getScene().lookup("#tableview");
+                						  // 여기에 ObservableList 형태로 만들어진 데이터들을 집어넣는다. 
+                                          // 자동으로 인식해서 테이블 만듦.
+                tableViewStage.show();    // 이제 그걸 보여줌.
                 searchByNameStage.close();
 
-            } catch (SQLException ex) {
+            } catch (SQLException ex) { //예외처리
                 ex.printStackTrace();
             } catch (Exception e) {
                 e.printStackTrace();
@@ -380,6 +378,7 @@ public class Controller {
             }
         }
     }
+    
 
     public void addBookButton(ActionEvent event) {
         Label printCommand = (Label) addBookStage.getScene().lookup("#command");
@@ -387,15 +386,15 @@ public class Controller {
         TextField isbn = (TextField) addBookStage.getScene().lookup("#isbn");
         TextField title = (TextField) addBookStage.getScene().lookup("#title");
         TextField author = (TextField) addBookStage.getScene().lookup("#author");
-        TextField regdate = (TextField) addBookStage.getScene().lookup("#regdate");
+   
         TextField price = (TextField) addBookStage.getScene().lookup("#price");
         TextField quantity = (TextField) addBookStage.getScene().lookup("#quantity");
         
-        if (isbn.getText().isEmpty() || title.getText().isEmpty() || author.getText().isEmpty() || regdate.getText().isEmpty() || price.getText().isEmpty() || quantity.getText().isEmpty()) {
+        if (isbn.getText().isEmpty() || title.getText().isEmpty() || author.getText().isEmpty() || price.getText().isEmpty() || quantity.getText().isEmpty()) {
             printCommand.setVisible(true);
             printCommand.setText("어떤 필드도 비울 수 없습니다!");
         } else {
-            dbSQL.addBook(isbn.getText(), title.getText(),author.getText(), regdate.getText(), price.getText(),quantity.getText() );
+            dbSQL.addBook(isbn.getText(), title.getText(),author.getText(), price.getText(),quantity.getText() );
 
             Alert alert = new Alert(Alert.AlertType.INFORMATION, "완료! :D", ButtonType.OK);
             alert.setTitle("추가되었습니다!");
@@ -407,35 +406,6 @@ public class Controller {
             dbSQL.freeUpResources();
         }
     }
-
-    // --------------------------------테스트------------------------------------------//
-    
-//    public static class Book {
-//        private final SimpleStringProperty isbn;
-//        private final SimpleStringProperty title;
-//        private final SimpleStringProperty author;
-//        private final SimpleStringProperty regdate;
-//        private final SimpleStringProperty price;
-//    //    private final SimpleStringProperty Publisher ;  출판사
-//    //    private final SimpleIntegerProperty Quantity ;  재고
-//    //    private final SimpleBooleanProperty Availability ;  가능여부
-//   
-//    // get()으로 정보를 가져오기 위한 절차
-//    public Book(String isbn, String title, String author,String regdate, String price) {
-//        this.isbn = new SimpleStringProperty(isbn);  
-//        this.title = new SimpleStringProperty(title);
-//        this.author = new SimpleStringProperty(author);
-//        this.regdate = new SimpleStringProperty(regdate);
-//        this.price = new SimpleStringProperty(price);
-//    //    this.Publisher =new SimpleStringProperty(Publisher);
-//    //   this.Quantity = new SimpleIntegerProperty(Quantity);
-//    //    this.Availability = new SimpleBooleanProperty(Availability);
-//    }
-//    // get()
-//    public String getTitle() {
-//            return title.get();
-//       } 
-//    }
    
  // [추가된 부분] 책 삭제
    	public void deleteBookButton(ActionEvent event) {
@@ -462,7 +432,7 @@ public class Controller {
    }
  }
    	// [추가된 부분] 책 수정
- 	public void editBookButton(ActionEvent event) {
+ 	public void editBookButton(ActionEvent event) throws SQLException {
  		TextField editTargetTitle = (TextField) editBookStage.getScene().lookup("#editTargetTitle");
         
         TextField editIsbn = (TextField) editBookStage.getScene().lookup("#editIsbn");
@@ -470,8 +440,9 @@ public class Controller {
         TextField editAuthor = (TextField) editBookStage.getScene().lookup("#editAuthor");
         TextField editRegdate = (TextField) editBookStage.getScene().lookup("#editRegdate");
         TextField editPrice = (TextField) editBookStage.getScene().lookup("#editPrice");
-        TextField editQuantity = (TextField) editBookStage.getScene().lookup("#editQuantity");
-   		
+        
+        
+      
  	    Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
  	    alert.setTitle("도서 수정");
  	    alert.setContentText("정말 수정하시겠습니까? 책제목 :" + editTargetTitle.getText());
@@ -479,7 +450,7 @@ public class Controller {
  	     Optional<ButtonType> answer = alert.showAndWait();
  	     
  	    if(answer.get() == ButtonType.OK){
- 	    	 dbSQL.editBook( editIsbn.getText(), editTitle.getText(),editAuthor.getText(), editRegdate.getText(), editPrice.getText(), editQuantity.getText(),
+ 	    	 dbSQL.editBook( editIsbn.getText(), editTitle.getText(),editAuthor.getText(), editRegdate.getText(), editPrice.getText(),
  	    			editTargetTitle.getText());
  	    // isbn, 제목, 저자, 등록일, 가격을 입력하여 바꾼다.
  	     Alert alert2 = new Alert(Alert.AlertType.INFORMATION, "완료! :D", ButtonType.OK);
@@ -535,17 +506,79 @@ public class Controller {
  	}
  	
  	
- 	//[미구현] 책 정보 확인버튼
- 	public void printInformation(ActionEvent event) {
- 		TextField editTargetTitle = (TextField) editBookStage.getScene().lookup("#editTargetTitle");
- 		Label printInformation = (Label) editBookStage.getScene().lookup("#printBookInformation");
- 		dbSQL.searchByTitle(editTargetTitle.getText());
- 		printInformation.setVisible(true);
- 		printInformation.setText(editTargetTitle.getText());
- 		
- 		
- 	}
+ 	//수정화면에서 책 정보 확인버튼
+ 	public void printInformation(ActionEvent event) throws InterruptedException {
+ 		TextField editTargetTitle = (TextField) editBookStage.getScene().lookup("#editTargetTitle"); 		
+          
+                 dbSQL.connect();
+                 try {
+					dbSQL.stmt = dbSQL.conn.createStatement();
+					dbSQL.rs = dbSQL.stmt.executeQuery("SELECT * FROM books WHERE title = '" + editTargetTitle.getText() + "'");  // 입력한 제목과 일치하는 책 가져오는 SQL
+	                Label isbn = (Label) editBookStage.getScene().lookup("#isbn");
+	                Label author = (Label) editBookStage.getScene().lookup("#author");
+	                Label price = (Label) editBookStage.getScene().lookup("#price");
+	                Label regdate = (Label) editBookStage.getScene().lookup("#regdate");
+	                while(dbSQL.rs.next()){   // result set에 값이 있다면 반복
+	                isbn.setText(dbSQL.rs.getNString(1)); // isbn이라는 라벨에서 result set에 저장된 첫번째 열의 값을 가져온다. 즉, isbn 정보를 가져옴.
+	                author.setText(dbSQL.rs.getNString(3)); // author라는 라벨에서 result set에 저장된 세번째 열의 값을 가져온다. 즉, 저자 정보를 가져옴
+	                price.setText(dbSQL.rs.getNString(4));
+	                regdate.setText(dbSQL.rs.getNString(5));
+	                }  //
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+                         
+         }
+ 	//가장 재고가 적게남은 책 보기
+ 	public void NotManyBooksButton(ActionEvent event) throws InterruptedException{
+ 		dbSQL.connect();
+        try {
+			dbSQL.stmt = dbSQL.conn.createStatement();
+			dbSQL.rs = dbSQL.stmt.executeQuery("SELECT * FROM books WHERE quantity = (SELECT min(quantity) FROM books)");  // 서브쿼리를 이용한 가장 재고가 적은 책 정보 뽑아내기
+			Label littleTitle = (Label) editQuantityStage.getScene().lookup("#littleTitle");
+	 		 Label littleNum = (Label) editQuantityStage.getScene().lookup("#littleNum");
+     
+           while(dbSQL.rs.next()){   
+           littleTitle.setText(dbSQL.rs.getNString(2)); 
+           littleNum.setText(dbSQL.rs.getNString(6)+"권남았습니다.");
+
+           }  
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+ 		 
+     }
  	
-}
+ 	//가장 재고가 많이남은 책 보기
+ 	public void ManyBooksButton(ActionEvent event) throws InterruptedException{
+ 		
+ 		dbSQL.connect();
+        try {
+			dbSQL.stmt = dbSQL.conn.createStatement();
+			dbSQL.rs = dbSQL.stmt.executeQuery("SELECT * FROM books WHERE quantity = (SELECT max(quantity) FROM books)");  // 서브쿼리를 이용한 가장 재고가 많은 책 정보 뽑아내기
+			Label manyTitle = (Label) editQuantityStage.getScene().lookup("#manyTitle");
+	 		 Label manyNum = (Label) editQuantityStage.getScene().lookup("#manyNum");
+     
+           while(dbSQL.rs.next()){   
+           manyTitle.setText(dbSQL.rs.getNString(2)); 
+           manyNum.setText(dbSQL.rs.getNString(6)+"권남았습니다.");
+
+           }  //
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+ 		 
+     }
+   }
+
+
+
+ 		
+ 	
+ 	
+
 
 
