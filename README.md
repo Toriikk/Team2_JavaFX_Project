@@ -13,3 +13,6 @@ eclipse,oracle,scenebuilder
 
 -사용한 언어
 JAVA
+
+-프로젝트 기간
+2022/06/16~2022/06/31
