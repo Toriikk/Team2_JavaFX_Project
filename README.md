@@ -9,7 +9,7 @@
 6. 도서전체목록
 
 -사용한 프로그램
-eclipse,oracle,scenebuilder
+eclipse,oracle(11g),scenebuilder
 
 -사용한 언어
 JAVA(11버전)
