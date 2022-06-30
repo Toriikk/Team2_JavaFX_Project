@@ -464,16 +464,16 @@ public class Controller {
   }
  	// [추가된 부분] 책 재고 추가 및 삭제
  	public void addQuantityButton(ActionEvent event) {
- 		TextField editTargetTitle1 = (TextField) editQuantityStage.getScene().lookup("#editTargetTitle1");
+ 		TextField editTargetTitle = (TextField) editQuantityStage.getScene().lookup("#editTargetTitle1");
  		TextField QuantityNumber = (TextField) editQuantityStage.getScene().lookup("#QuantityNumber");
  		 
  		Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
  	 	    alert.setTitle("재고 추가");
- 	 	    alert.setContentText("정말 추가하시겠습니까? 책제목 :" + editTargetTitle1.getText()
+ 	 	    alert.setContentText("정말 추가하시겠습니까? 책제목 :" + editTargetTitle.getText()
  	 	    +"추가할 수량 : " + QuantityNumber.getText() +"권");
  	 	  Optional<ButtonType> answer = alert.showAndWait();
  	 	  if(answer.get() == ButtonType.OK){
-  	    	 dbSQL.addQuantity(QuantityNumber.getText(),editTargetTitle1.getText() );
+  	    	 dbSQL.addQuantity(QuantityNumber.getText(),editTargetTitle.getText() );
   	     Alert alert2 = new Alert(Alert.AlertType.INFORMATION, "완료! :D", ButtonType.OK);
   	     alert2.setTitle("추가되었습니다!");
   	     alert2.setHeaderText(null);
@@ -485,7 +485,7 @@ public class Controller {
  	}
  	
  	public void deleteQuantityButton(ActionEvent event) {
- 		TextField editTargetTitle = (TextField) editQuantityStage.getScene().lookup("#editTargetTitle");
+ 		TextField editTargetTitle = (TextField) editQuantityStage.getScene().lookup("#editTargetTitle1");
  		TextField QuantityNumber = (TextField) editQuantityStage.getScene().lookup("#QuantityNumber");
  		 
  		Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
@@ -573,12 +573,4 @@ public class Controller {
  		 
      }
    }
-
-
-
- 		
- 	
- 	
-
-
 
