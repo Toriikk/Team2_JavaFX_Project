@@ -73,7 +73,7 @@ public class DB {
                     "'" + isbn + "'," +
                     "'" + title + "'," +
                     "'" + author + "'," +
-                    "TO_CHAR(SYSDATE,'YYYY-MM-DD'),"+  //현재 날짜를 DATE형식으로 입력
+                    "TO_CHAR(SYSDATE,'YYYY-MM-DD'),"+  //현재 날짜를 DATE형식으로 
                     "'" +price + "'," 
                     + quantity + ")");  // sql문을 실행해줌. isbn, title, author, year,regdate,price 컬럼에 값(VALUES)을 넣는다
         } catch (Exception e) {
@@ -118,5 +118,6 @@ public class DB {
 
             stmt = null;
         }
+
     }
 }
