@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.image.*?>
 <?import java.lang.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
@@ -11,57 +12,41 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<GridPane alignment="center" hgap="10" vgap="10" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.Controller">
-   <columnConstraints>
-      <ColumnConstraints />
-   </columnConstraints>
-   <rowConstraints>
-      <RowConstraints />
-   </rowConstraints>
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="445.0" prefWidth="727.0" style="-fx-background-color: #827777;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.Controller">
    <children>
-      <AnchorPane prefHeight="493.0" prefWidth="430.0">
-         <children>
-            <Button fx:id="deleteBook" layoutX="14.0" layoutY="200.0" mnemonicParsing="false" onAction="#deleteBookWindow" prefHeight="50.0" prefWidth="400.0" text="책 삭제 " AnchorPane.leftAnchor="15.0" AnchorPane.topAnchor="230.0">
-               <font>
-                  <Font name="System Bold Italic" size="18.0" />
-               </font>
-            </Button>
-         	<Button fx:id="searchBytitle" layoutX="15.0" layoutY="186.0" mnemonicParsing="false" onAction="#searchByTitleWindow" prefHeight="50.0" prefWidth="400.0" text="책 제목을 입력하세요" AnchorPane.leftAnchor="15.0" AnchorPane.topAnchor="186.0">
-               <font>
-                  <Font name="System Bold Italic" size="18.0" />
-               </font>
-            </Button>
-            <Button fx:id="searchByName" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#searchByNameWindow" prefHeight="50.0" prefWidth="400.0" text="저자 이름을 입력하세요" AnchorPane.leftAnchor="15.0" AnchorPane.topAnchor="10.0">
-               <font>
-                  <Font name="System Bold Italic" size="18.0" />
-               </font>
-            </Button>
-            <Button fx:id="searchByISBN" layoutX="14.0" layoutY="76.0" mnemonicParsing="false" onAction="#searchByISBNWindow" prefHeight="50.0" prefWidth="400.0" text="ISBN으로 검색" AnchorPane.leftAnchor="15.0" AnchorPane.topAnchor="70.0">
-               <font>
-                  <Font name="System Bold Italic" size="18.0" />
-               </font>
-            </Button>
-            <Button fx:id="addBook" layoutX="14.0" layoutY="145.0" mnemonicParsing="false" onAction="#addBookWindow" prefHeight="50.0" prefWidth="400.0" text="새 책 추가 " AnchorPane.leftAnchor="15.0" AnchorPane.topAnchor="130.0">
-               <font>
-                  <Font name="System Bold Italic" size="18.0" />
-               </font>
-            </Button>
-            <Button fx:id="editBook" layoutX="15.0" layoutY="291.0" mnemonicParsing="false" onAction="#editBookWindow" prefHeight="50.0" prefWidth="400.0" text="책 수정">
-               <font>
-                  <Font name="System Bold Italic" size="18.0" />
-               </font>
-            </Button>
-            <Button fx:id="viewAllBook" layoutX="15.0" layoutY="356.0" mnemonicParsing="false" onAction="#viewAllBookButton" prefHeight="50.0" prefWidth="400.0" text="책 전체 목록 조회">
-               <font>
-                  <Font name="System Bold Italic" size="18.0" />
-               </font>
-            </Button>
-            <Button fx:id="editQuantity" layoutX="15.0" layoutY="420.0" mnemonicParsing="false" onAction="#editQuantityWindow" prefHeight="50.0" prefWidth="400.0" text="재고 관리">
-               <font>
-                  <Font name="System Bold Italic" size="18.0" />
-               </font>
-            </Button>
-         </children>
-      </AnchorPane>
+      <ImageView fitHeight="445.0" fitWidth="257.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <!-- <Image url="@../../../사진.png" /> -->
+            <Image url="@../../img/사진.png" />
+         </image>
+      </ImageView>
+      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="43.0" layoutY="54.0" prefHeight="65.0" prefWidth="171.0" style="-fx-background-color: #a38a8a;" text="books" textFill="WHITE">
+         <font>
+            <Font size="56.0" />
+         </font>
+      </Label>
+      <Button fx:id="searchByName" layoutX="54.0" layoutY="181.0" mnemonicParsing="false" onAction="#searchByNameWindow" prefHeight="23.0" prefWidth="141.0" text="저자명 검색" />
+      <Button fx:id="searchByISBN" layoutX="54.0" layoutY="246.0" mnemonicParsing="false" onAction="#searchByISBNWindow" prefHeight="23.0" prefWidth="141.0" text="ISBN 검색" />
+      <Button fx:id="searchBytitle" layoutX="54.0" layoutY="310.0" mnemonicParsing="false" onAction="#searchByTitleWindow" prefHeight="23.0" prefWidth="141.0" text="제목 검색" />
+      <Button fx:id="addBook" layoutX="322.0" layoutY="60.0" mnemonicParsing="false" onAction="#addBookWindow" prefHeight="33.0" prefWidth="357.0" style="-fx-background-radius: 5em;" text="책 추가">
+         <font>
+            <Font size="17.0" />
+         </font></Button>
+      <Button fx:id="deleteBook" layoutX="322.0" layoutY="135.0" mnemonicParsing="false" onAction="#deleteBookWindow" prefHeight="33.0" prefWidth="357.0" style="-fx-background-radius: 5em;" text="책 삭제">
+         <font>
+            <Font size="17.0" />
+         </font></Button>
+      <Button fx:id="editBook" layoutX="322.0" layoutY="356.0" mnemonicParsing="false" onAction="#editBookWindow" prefHeight="33.0" prefWidth="357.0" style="-fx-background-radius: 5em;" text="책 수정">
+         <font>
+            <Font size="17.0" />
+         </font></Button>
+      <Button fx:id="editQuantity" layoutX="322.0" layoutY="206.0" mnemonicParsing="false" onAction="#editQuantityWindow" prefHeight="33.0" prefWidth="357.0" style="-fx-background-radius: 5em;" text="재고 관리">
+         <font>
+            <Font size="17.0" />
+         </font></Button>
+      <Button fx:id="editQuantity" layoutX="322.0" layoutY="277.0" mnemonicParsing="false" onAction="#viewAllBookButton" prefHeight="33.0" prefWidth="357.0" style="-fx-background-radius: 5em;" text="책 전체 목록 조회">
+         <font>
+            <Font size="17.0" />
+         </font></Button>
    </children>
-</GridPane>
+</AnchorPane>
