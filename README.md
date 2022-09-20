@@ -16,3 +16,5 @@ JAVA(11버전)
 
 -프로젝트 기간
 2022/06/16~2022/06/31
+
+* PPT보기 [Link](https://docs.google.com/presentation/d/1af6Y6KEo1JfoULnR3Zn4efhkbXI74SiTwzSWjWkk7Qo/edit?usp=sharing)
